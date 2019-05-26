@@ -28,8 +28,6 @@ $(function() {
         // isDelete 表示用户的启用状态, 1就是启用, 0就是禁用
         var htmlStr = template( "tpl", info );
         $('.lt_content tbody').html( htmlStr );
-
-
         // 配置分页
         $('#paginator').bootstrapPaginator({
           // 指定bootstrap版本
