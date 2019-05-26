@@ -2,7 +2,7 @@
  * Created by Jepson on 2018/4/7.
  */
 
-$(function() {
+$(function () {
 
   // 当前页
   var currentPage = 1;
@@ -21,11 +21,11 @@ $(function() {
         page: currentPage,
         pageSize: pageSize
       },
-      success: function( info ) {
-        console.log( info );
+      success: function (info) {
+        console.log(info);
         // 结合模板进行渲染
-        var htmlStr = template( "userTpl", info );
-        $('.lt_content tbody').html( htmlStr );
+        var htmlStr = template("userTpl", info);
+        $('.lt_content tbody').html(htmlStr);
 
         // 分页初始化
         $('#paginator').bootstrapPaginator({
@@ -34,10 +34,10 @@ $(function() {
           // 当前页
           currentPage: info.page,
           // 总页数
-          totalPages: Math.ceil( info.total / info.size ),
+          totalPages: Math.ceil(info.total / info.size),
 
           // 给页码添加点击事件
-          onPageClicked: function( a, b, c, page ) {
+          onPageClicked: function (a, b, c, page) {
             // 将选中的页码更新到 currentPage
             currentPage = page;
             // 重新渲染
@@ -51,7 +51,7 @@ $(function() {
 
 
   // 2. 点击添加分类按钮, 显示添加模态框
-  $('#addBtn').click(function() {
+  $('#addBtn').click(function () {
     $('#addModal').modal("show");
   })
 
@@ -88,15 +88,14 @@ $(function() {
 
   // (使用form="form", 通过了校验, 也不会提交了, 可以省去 e.preventDefault() )
 
-  $('#form').on("success.form.bv", function( e ) {
+  $('#form').on("success.form.bv", function (e) {
     e.preventDefault();
 
     $.ajax({
       url: "/category/addTopCategory",
       type: "POST",
       data: $('#form').serialize(),
-      success: function( info ) {
-        console.log(info);
+      success: function (info) {
         if (info.success) {
           // 关闭模态框
           $('#addModal').modal("hide");
@@ -106,7 +105,7 @@ $(function() {
 
           // 重置表单校验状态和 表单内容
           // 传 true 不仅可以重置 状态, 还可以重置内容
-          $('#form').data("bootstrapValidator").resetForm( true );
+          $('#form').data("bootstrapValidator").resetForm(true);
         }
       }
     })
